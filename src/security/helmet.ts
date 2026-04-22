@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Enhanced Security Headers (Helmet-like)
+ * Servra - Enhanced Security Headers (Helmet-like)
  * 
  * Adds security headers to responses for OWASP Top 10 protection.
  * All headers are enabled by default.
@@ -26,6 +26,7 @@ export function helmet(options: Partial<HelmetOptions> = {}): Middleware {
     xPermittedCrossDomainPolicies: options.xPermittedCrossDomainPolicies ?? 'none',
     xXSSProtection: options.xXSSProtection ?? '1; mode=block',
     permissionsPolicy: options.permissionsPolicy ?? true,
+    expectCt: options.expectCt ?? { maxAge: 31536000, enforce: true },
   };
 
   return (req: LOARequest, res: LOAResponse, next: () => void) => {
@@ -115,6 +116,14 @@ export function helmet(options: Partial<HelmetOptions> = {}): Middleware {
       if (ppValue) {
         res.header('Permissions-Policy', ppValue);
       }
+    }
+
+    if (opts.expectCt) {
+      const expectCtValue = typeof opts.expectCt === 'object'
+        ? `max-age=${opts.expectCt.maxAge}; ${opts.expectCt.enforce ? 'enforce' : ''}${opts.expectCt.reportUri ? '; report-uri=' + opts.expectCt.reportUri : ''}`
+        : 'max-age=31536000; enforce';
+      
+      res.header('Expect-CT', expectCtValue);
     }
 
     next();

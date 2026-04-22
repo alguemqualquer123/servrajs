@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Schema Builder
+ * Servra - Schema Builder
  */
 
 export interface SchemaField {

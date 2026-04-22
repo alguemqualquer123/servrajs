@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Core TypeScript Types
+ * Servra - Core TypeScript Types
  * 
  * Defines all types needed for the framework to ensure
  * maximum type safety and developer experience.
@@ -287,6 +287,7 @@ export interface HelmetOptions {
   xPermittedCrossDomainPolicies: boolean | string;
   xXSSProtection: boolean | string;
   permissionsPolicy: boolean | Record<string, string[]>;
+  expectCt: boolean | { maxAge: number; enforce: boolean; reportUri?: string };
 }
 
 export interface RateLimitOptions {
@@ -395,6 +396,12 @@ export interface LOAApp extends EventEmitter {
   // Documentation
   docs(options?: DocsOptions): this;
   documentRoute(route: DocsRoute): this;
+  getOpenApiSpec(): {
+    openapi: string;
+    info: Record<string, unknown>;
+    paths: Record<string, unknown>;
+    [key: string]: unknown;
+  };
 
   // Error handling
   setErrorHandler(handler: ErrorHandler): this;
@@ -472,3 +479,11 @@ export interface LoggerOptions {
   prefix?: string;
   timestamp: boolean;
 }
+
+// ============================================================================
+// Servra Type Aliases (branding)
+// ============================================================================
+
+export type ServraRequest = LOARequest;
+export type ServraResponse = LOAResponse;
+export type ServraApp = LOAApp;

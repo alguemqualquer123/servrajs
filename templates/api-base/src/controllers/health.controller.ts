@@ -1,8 +1,8 @@
-import type { LOARequest, LOAResponse } from '__PACKAGE_NAME__';
+import type { ServraRequest, ServraResponse } from '__PACKAGE_NAME__';
 
 const startedAt = new Date();
 
-export function health(req: LOARequest, res: LOAResponse) {
+export function health(req: ServraRequest, res: ServraResponse) {
   return res.json({
     ok: true,
     status: 'healthy',

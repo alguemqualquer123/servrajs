@@ -12,7 +12,7 @@ jobs:
   banner:
     runs-on: ubuntu-latest
     steps:
-      - name: 'LOA Framework Banner'
+      - name: 'Servra Banner'
         uses: ./.github/actions/banner
 
   build:
@@ -169,7 +169,7 @@ jobs:
         run: |
           echo ""
           echo "  ✅ Published successfully!"
-          echo "  📦 Package: @srvinix/loa@${{ github.ref_name }}"
+          echo "  📦 Package: servra@${{ github.ref_name }}"
           echo ""
 
   success:

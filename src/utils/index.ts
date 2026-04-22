@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Utilities
+ * Servra - Utilities
  */
 
 import { randomUUID } from '../core/crypto';
@@ -10,11 +10,14 @@ function generateUUID(): string {
 
 export { generateUUID };
 
+export * from './pool';
+export { compression } from './compression';
+
 class DefaultLogger {
   #prefix: string;
   #level: string;
 
-  constructor(prefix: string = '[LOA]', level: string = 'info') {
+  constructor(prefix: string = '[SERVRA]', level: string = 'info') {
     this.#prefix = prefix;
     this.#level = level;
   }
@@ -66,7 +69,7 @@ export function createLogger(options?: { prefix?: string; level?: LogLevel }): L
 }
 
 export function createDefaultLogger(): Logger {
-  return new DefaultLogger('[LOA]', 'error');
+  return new DefaultLogger('[SERVRA]', 'error');
 }
 
 class FastBufferPool {

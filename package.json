@@ -1,52 +1,59 @@
 {
-  "name": "@srvinix/loa",
-  "version": "1.0.0",
+  "name": "servrajs",
+  "version": "1.0.2",
   "description": "Lightweight Optimized Application - Ultrafast, Secure, Modern backend framework for Node.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "bin": {
-    "loa": "./bin/loa.js"
+    "servra": "bin/servra.js"
   },
   "files": [
     "dist",
     "bin",
+    "docs",
+    "tests",
     "templates",
     "README.md"
   ],
-  "imports": {
-    "#*": "./src/*"
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./protocols": {
+      "types": "./dist/protocols/index.d.ts",
+      "import": "./dist/protocols/index.js"
+    },
+    "./resilience": {
+      "types": "./dist/resilience/index.d.ts",
+      "import": "./dist/resilience/index.js"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alguemqualquer123/loa_framework.git"
+    "url": "git+https://github.com/alguemqualquer123/servrajs.git"
   },
-  "homepage": "https://github.com/alguemqualquer123/loa_framework#readme",
+  "homepage": "https://github.com/alguemqualquer123/servrajs#readme",
   "bugs": {
-    "url": "https://github.com/alguemqualquer123/loa_framework/issues"
+    "url": "https://github.com/alguemqualquer123/servrajs/issues"
   },
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "node scripts/build.js --watch",
     "test": "node scripts/build.js && node tests/index.js",
-    "benchmark": "node scripts/build.js && node tests/benchmark.js",
-    "start": "node scripts/build.js && node bin/loa.js start",
-    "cli": "node bin/loa.js",
     "typecheck": "tsc --noEmit",
     "prepack": "node scripts/build.js",
-    "prepublishOnly": "node scripts/build.js",
-    "publish": "npm publish --access public",
-    "publish:beta": "npm publish --access public --tag beta",
-    "publish:dry": "npm publish --access public --dry-run",
-    "format": "prettier --write src/**/*.ts",
-    "lint": "tsc --noEmit",
-    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\""
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "release": "npm version patch --no-git-tag-version && npm run build && npm publish --access public",
+    "release:beta": "npm version prerelease --no-git-tag-version && npm run build && npm publish --access public --tag beta"
   },
   "keywords": [
     "framework",
@@ -59,8 +66,14 @@
     "fast",
     "nodejs"
   ],
-  "author": "LOA Team",
+  "author": {
+    "name": "SR VINIX",
+    "email": "danilovinicius17@gmail.com"
+  },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=18.0.0"
   },

@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Router
+ * Servra - Router
  */
 
 export { createRouter, Router } from './router';

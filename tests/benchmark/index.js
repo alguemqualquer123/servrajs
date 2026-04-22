@@ -1,7 +1,7 @@
 /**
- * LOA Framework - Benchmark Tests
+ * Servra - Benchmark Tests
  * 
- * Compares performance between LOA, Express, and Fastify.
+ * Compares performance between Servra, Express, and Fastify.
  * Run with: node tests/benchmark/index.js
  */
 
@@ -171,10 +171,10 @@ async function createFastifyServer() {
 }
 
 // ============================================================================
-// LOA Server
+// Servra Server
 // ============================================================================
 
-async function createLOAServer() {
+async function createServraServer() {
   const { createApp } = await import('../../dist/index.js');
   
   const app = createApp({
@@ -195,25 +195,25 @@ async function createLOAServer() {
 // ============================================================================
 
 async function runBenchmarks() {
-  console.log('\n🧪 LOA Framework Benchmark\n');
+  console.log('\n🧪 Servra Benchmark\n');
   console.log(`Configuration:`);
   console.log(`  Duration: ${CONFIG.duration}ms per test`);
   console.log(`  Concurrency: ${CONFIG.concurrency} requests\n`);
   
   const results = [];
   
-  // Test LOA
-  console.log('Testing LOA...');
-  const loaApp = await createLOAServer();
-  const loaServer = await loaApp.listen(CONFIG.port);
-  const loaResult = await runBenchmark('loa', loaServer);
-  await loaApp.close();
-  results.push({ name: 'LOA', ...loaResult });
-  console.log(`  Requests: ${loaResult.total.toLocaleString()}`);
-  console.log(`  RPS: ${loaResult.rps.toLocaleString()}`);
-  console.log(`  Avg: ${loaResult.avg.toFixed(2)}ms`);
-  console.log(`  p50: ${loaResult.p50}ms`);
-  console.log(`  p99: ${loaResult.p99}ms\n`);
+  // Test Servra
+  console.log('Testing Servra...');
+  const servraApp = await createServraServer();
+  const servraServer = await servraApp.listen(CONFIG.port);
+  const servraResult = await runBenchmark('servra', servraServer);
+  await servraApp.close();
+  results.push({ name: 'Servra', ...servraResult });
+  console.log(`  Requests: ${servraResult.total.toLocaleString()}`);
+  console.log(`  RPS: ${servraResult.rps.toLocaleString()}`);
+  console.log(`  Avg: ${servraResult.avg.toFixed(2)}ms`);
+  console.log(`  p50: ${servraResult.p50}ms`);
+  console.log(`  p99: ${servraResult.p99}ms\n`);
   
   // Test Fastify (if available)
   if (fastify) {

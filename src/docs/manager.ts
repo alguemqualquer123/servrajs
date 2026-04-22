@@ -275,7 +275,7 @@ function normalizeOptions(options: DocsOptions = {}): InternalDocsOptions {
   return {
     enabled: options.enabled ?? true,
     path: normalizePath(options.path ?? '/docs'),
-    title: options.title ?? 'LOA API Docs',
+    title: options.title ?? 'Servra API Docs',
     version: options.version ?? '1.0.0',
     description: options.description ?? 'Interactive API documentation',
     apiKeys,

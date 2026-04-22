@@ -4,7 +4,21 @@
     "parser": {
       "syntax": "typescript"
     },
-    "target": "es2022"
+    "target": "es2022",
+    "baseUrl": ".",
+    "paths": {
+      "#/core": ["src/core/index.ts"],
+      "#/*": ["src/*"],
+      "#/security": ["src/security/index.ts"],
+      "#/utils": ["src/utils/index.ts"],
+      "#/router": ["src/router/index.ts"],
+      "#/request": ["src/request/index.ts"],
+      "#/response": ["src/response/index.ts"],
+      "#/middleware": ["src/middleware/index.ts"],
+      "#/docs": ["src/docs/index.ts"],
+      "#/validation": ["src/validation/index.ts"],
+      "#/plugins": ["src/plugins/index.ts"]
+    }
   },
   "module": {
     "type": "es6"

@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Route Definitions
+ * Servra - Route Definitions
  */
 
 import type { HttpMethod, Handler, Middleware, RequestParams } from '../core/types';

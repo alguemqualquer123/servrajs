@@ -1,5 +1,5 @@
-name: 'LOA Framework Banner'
-description: 'Display LOA Framework animated banner'
+name: 'Servra Banner'
+description: 'Display Servra animated banner'
 
 runs:
   using: 'composite'
@@ -16,7 +16,7 @@ runs:
         echo "  ╚═╝      ╚═════╝ ╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝     "
         echo ""
         echo "═══════════════════════════════════════════════════════════════════"
-        echo "  ⚡ LOA Framework - Lightweight Optimized Application ⚡"
+        echo "  ⚡ Servra - Lightweight Optimized Application ⚡"
         echo "═══════════════════════════════════════════════════════════════════"
         echo ""
         echo "  🎯 Ultrafast • 🔒 Secure • 📦 Modern"
@@ -29,7 +29,7 @@ runs:
         echo "    ✓ TypeScript Native"
         echo "    ✓ Zero Dependencies"
         echo ""
-        echo "  npm install loa"
+        echo "  npm install servra"
         echo ""
         echo "═══════════════════════════════════════════════════════════════════"
         echo ""

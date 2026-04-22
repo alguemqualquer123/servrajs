@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Core Application
+ * Servra - Core Application
  */
 
 import { createServer, Server, ServerResponse, IncomingMessage } from 'http';
@@ -102,7 +102,7 @@ export class LOAApplication extends Emitter {
     }
 
     if (this.#options.debug) {
-      this.#logger.info('[LOA] Application initialized');
+      this.#logger.info('[SERVRA] Application initialized');
     }
   }
 
@@ -225,7 +225,7 @@ export class LOAApplication extends Emitter {
     rawRes: ServerResponse,
     requestId: string
   ): Promise<void> {
-    this.#logger.error(`[LOA] Request error: ${error.message}`, error.stack);
+    if (this.#options.debug) { this.#logger.error(`[SERVRA] Request error: ${error.message}`, error.stack); } else { this.#logger.debug(`[SERVRA] Request error: ${error.message}`); }
 
     if (this.#state.errorHandler) {
       try {
@@ -278,14 +278,14 @@ export class LOAApplication extends Emitter {
   }
 
   #handleServerError(error: Error): void {
-    this.#logger.error('[LOA] Server error:', error);
+    if (this.#options.debug) { this.#logger.debug(`[SERVRA] Server error: ${error.message}`); } else { this.#logger.error(`[SERVRA] Server error: ${error.message}`); }
     this.emit('error', error);
   }
 
   #handleServerClose(): void {
     this.#state.running = false;
     if (this.#options.debug) {
-      this.#logger.info('[LOA] Server closed');
+      this.#logger.info('[SERVRA] Server closed');
     }
     this.emit('close');
   }
@@ -307,7 +307,7 @@ export class LOAApplication extends Emitter {
     
     if (this.#options.debug || durationMs > 100) {
       this.#logger.debug(
-        `[LOA] ${method} ${path} ${statusCode} ${durationMs.toFixed(2)}ms`
+        `[SERVRA] ${method} ${path} ${statusCode} ${durationMs.toFixed(2)}ms`
       );
     }
   }
@@ -420,7 +420,7 @@ export class LOAApplication extends Emitter {
     });
 
     if (this.#options.debug) {
-      this.#logger.info(`[LOA] Route registered: ${method} ${path}`);
+      this.#logger.info(`[SERVRA] Route registered: ${method} ${path}`);
     }
     this.emit('route', method, path, actualHandler);
 
@@ -450,7 +450,7 @@ export class LOAApplication extends Emitter {
       this.emit('middleware', mw);
     }
 
-    this.#logger.debug(`[LOA] Middleware registered: ${middlewares.length}`);
+    this.#logger.debug(`[SERVRA] Middleware registered: ${middlewares.length}`);
     return this;
   }
 
@@ -480,6 +480,15 @@ export class LOAApplication extends Emitter {
     return this;
   }
 
+  getOpenApiSpec(): {
+    openapi: string;
+    info: Record<string, unknown>;
+    paths: Record<string, unknown>;
+    [key: string]: unknown;
+  } {
+    return this.#docs.buildSpec();
+  }
+
   setErrorHandler(handler: ErrorHandler): this {
     this.#state.errorHandler = handler;
     return this;
@@ -490,7 +499,7 @@ export class LOAApplication extends Emitter {
       throw new Error('Plugin must have name and register function');
     }
 
-    this.#logger.info(`[LOA] Registering plugin: ${plugin.name}`);
+    this.#logger.info(`[SERVRA] Registering plugin: ${plugin.name}`);
     
     await plugin.register(this);
     this.emit('plugin', plugin);
@@ -511,14 +520,14 @@ export class LOAApplication extends Emitter {
         this.#server.listen(listenPort, listenHost, () => {
           this.#state.running = true;
           if (this.#options.debug) {
-            this.#logger.info(`[LOA] Server listening on http://${listenHost}:${listenPort}`);
+            this.#logger.info(`[SERVRA] Server listening on http://${listenHost}:${listenPort}`);
           }
           this.emit('start', this.#server);
           resolve(this.#server);
         });
 
         this.#server.on('error', (error: Error) => {
-          this.#logger.error(`[LOA] Server error: ${error.message}`);
+          this.#logger.error(`[SERVRA] Server error: ${error.message}`);
           reject(error);
         });
       } catch (error) {
@@ -536,12 +545,12 @@ export class LOAApplication extends Emitter {
 
       this.#server.close((error) => {
         if (error) {
-          this.#logger.error(`[LOA] Error closing server: ${error.message}`);
+          this.#logger.error(`[SERVRA] Error closing server: ${error.message}`);
           reject(error);
         } else {
           this.#server = null;
           if (this.#options.debug) {
-            this.#logger.info('[LOA] Server closed');
+if (this.#options.debug) { this.#logger.debug(`[SERVRA] Server closed`); } else { this.#logger.info('[SERVRA] Server closed'); }
           }
           resolve();
         }

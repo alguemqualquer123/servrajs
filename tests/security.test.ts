@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Security Tests
+ * Servra - Security Tests
  */
 
 import { createApp, helmet, rateLimit, sanitize, cors, csrf } from '../src/index.js';

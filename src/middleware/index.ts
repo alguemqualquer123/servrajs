@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Middleware Export
+ * Servra - Middleware Export
  */
 
 export { MiddlewareRunner } from './runner';

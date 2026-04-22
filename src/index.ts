@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Main Export
+ * Servra - Main Export
  */
 
 import { createApp, LOAApplication } from './core/application';
@@ -20,6 +20,9 @@ export type {
   NextFunction,
   AppOptions,
   LOAApp,
+  ServraApp,
+  ServraRequest,
+  ServraResponse,
   DocsOptions,
   DocsSecurityOptions,
   DocsRoute,
@@ -54,7 +57,10 @@ export { validator, createSchema } from './validation/index';
 export { createLogger, createDefaultLogger } from './utils/index';
 export type { Logger, LogLevel } from './utils/index';
 
-export const name = 'loa';
+export { PluginManager, openApiScalar } from './plugins/index';
+export type { OpenApiScalarOptions } from './plugins/index';
+
+export const name = 'servra';
 export const version = '1.0.0';
 export const description = 'Lightweight Optimized Application - Ultrafast, Secure, Modern backend framework';
 

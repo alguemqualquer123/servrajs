@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Input Sanitizer
+ * Servra - Input Sanitizer
  * 
  * Prevents/protects against common input-based attacks:
  * - XSS

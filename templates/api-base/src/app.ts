@@ -47,14 +47,28 @@ export function createApi() {
   ]);
 
   registerRoutes(app);
-  app.docs({
-    title: '__PROJECT_NAME__ API Docs',
-    version: '1.0.0',
-    description: 'Interactive API docs with secure try-it requests.',
-    apiKeys: docsKeys,
+  app.get('/openapi.json', (req, res) => res.json(app.getOpenApiSpec()));
+  app.get('/scalar', (req, res) => {
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Scalar API Reference</title>
+</head>
+<body>
+  <script type="module">
+    import {{ default as ApiReference }} from 'https://cdn.jsdelivr.net/npm/@scalar/api-reference';
+    const el = document.createElement('div');
+    document.body.appendChild(el);
+    ApiReference({
+      spec: '/openapi.json',
+      layout: 'classic',
+    }, el);
+  </script>
+</body>
+</html>`;
+    res.header('Content-Type', 'text/html').send(html);
   });
-  registerDocs(app);
-  app.setErrorHandler(errorHandler);
 
   return app;
 }

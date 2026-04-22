@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Response Object
+ * Servra - Response Object
  */
 
 import { ServerResponse, OutgoingHttpHeaders, validateHeaderName, validateHeaderValue } from 'http';

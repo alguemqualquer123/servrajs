@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Middleware Runner
+ * Servra - Middleware Runner
  * 
  * Executes middleware stack in order, with support for:
  * - Synchronous and async middlewares
@@ -67,86 +67,55 @@ export class MiddlewareRunner {
     routeMiddlewares: Middleware[],
     finalHandler: () => Promise<void>
   ): Promise<void> {
-    const globalLength = this.#global.length;
-    const routeLength = routeMiddlewares.length;
-    const totalLength = globalLength + routeLength;
+    const stack = [...this.#global, ...routeMiddlewares];
 
-    if (totalLength === 0) {
-      await finalHandler();
-      return;
-    }
-
-    // Create next function with error parameter
-    const next: NextFunction = async (error?: Error) => {
-      // Handle error
-      if (error) {
-        await this.#handleError(error, req, res);
-        return;
-      }
-
-      // Get current index from request (stored as symbol)
-      const index = (req as unknown as { [key: string]: number }).middlewareIndex ?? 0;
-
-      // Check if all middlewares executed
-      if (index >= totalLength) {
-        // Call final handler
+    const dispatch = async (index: number): Promise<void> => {
+      if (index >= stack.length) {
         await finalHandler();
         return;
       }
 
-      // Execute next middleware
-      const middleware = index < globalLength
-        ? this.#global[index]
-        : routeMiddlewares[index - globalLength];
-      
-      // Increment index for next call
-      (req as unknown as { [key: string]: number }).middlewareIndex = index + 1;
+      const middleware = stack[index];
+
+      let nextCalled = false;
+      let downstream: Promise<void> | undefined;
+
+      const next: NextFunction = (error?: Error) => {
+        if (error) {
+          downstream = this.#handleError(error, req, res);
+          return;
+        }
+
+        if (nextCalled) {
+          return;
+        }
+
+        nextCalled = true;
+        downstream = dispatch(index + 1);
+      };
 
       try {
-        // Execute middleware
         const result = middleware(req, res, next);
-
-        // Handle async middlewares
         if (result instanceof Promise) {
           await result;
         }
       } catch (error) {
-        // Pass error to next
-        await next(error as Error);
+        next(error as Error);
+      }
+
+      if (downstream) {
+        await downstream;
       }
     };
 
-    // Start middleware execution
-    await next();
+    await dispatch(0);
   }
 
   /**
    * Run middlewares without route-specific middlewares
    */
   async run(req: LOARequest, res: LOAResponse): Promise<void> {
-    const next: NextFunction = async (error?: Error) => {
-      if (error) {
-        await this.#handleError(error, req, res);
-        return;
-      }
-
-      const index = (req as unknown as { [key: string]: number }).middlewareIndex ?? 0;
-
-      if (index >= this.#global.length) {
-        return;
-      }
-
-      const middleware = this.#global[index];
-      (req as unknown as { [key: string]: number }).middlewareIndex = index + 1;
-
-      try {
-        await middleware(req, res, next);
-      } catch (error) {
-        await next(error as Error);
-      }
-    };
-
-    await next();
+    await this.runWithMiddlewares(req, res, [], async () => {});
   }
 
   // ========================================================================
@@ -245,6 +214,11 @@ export function bodyParser(options: {
       req.setBody(parsed as RequestBody);
       next();
     } catch (error) {
+      if (error instanceof SyntaxError) {
+        next(createHttpError(400, 'Invalid JSON'));
+        return;
+      }
+
       next(error as Error);
     }
   };

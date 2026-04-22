@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Validation
+ * Servra - Validation
  */
 
 export { validator } from './validator';

@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Advanced Middleware
+ * Servra - Advanced Middleware
  * 
  * Advanced middleware features for security and request handling.
  */

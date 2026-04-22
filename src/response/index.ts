@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Response Export
+ * Servra - Response Export
  */
 
 export { LOAResponse, createResponse } from './response';

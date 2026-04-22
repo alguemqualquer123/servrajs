@@ -1,4 +1,4 @@
-# LOA Framework
+# Servra
 
 <div align="center">
 
@@ -15,13 +15,19 @@
 
 Ultrafast, Secure, Modern Backend Framework for Node.js
 
-[![Node.js Version](https://img.shields.io/node/v/loa)](https://nodejs.org)
+[![Node.js Version](https://img.shields.io/node/v/%40srvinix%2Fservra)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org)
-[![License](https://img.shields.io/npm/l/@srvinix/loa)](LICENSE)
-[![npm version](https://img.shields.io/npm/v/@srvinix/loa)](https://www.npmjs.com/package/@srvinix/loa)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/alguemqualquer123/loa_framework/ci-cd.yml)](https://github.com/alguemqualquer123/loa_framework/actions)
+[![License](https://img.shields.io/npm/l/%40srvinix%2Fservra)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/%40srvinix%2Fservra)](https://www.npmjs.com/package/servra)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/alguemqualquer123/servra/ci-cd.yml)](https://github.com/alguemqualquer123/servrajs/actions)
 
 </div>
+
+## Links
+
+- GitHub: https://github.com/alguemqualquer123/servrajs
+- LinkedIn: https://linkedin.com/in/srvinix
+- npm: https://www.npmjs.com/package/servra
 
 ## Features
 
@@ -37,13 +43,13 @@ Ultrafast, Secure, Modern Backend Framework for Node.js
 ## Installation
 
 ```bash
-npm install @srvinix/loa
+npm install servra
 ```
 
 ## Create an API template
 
 ```bash
-npx @srvinix/loa create my-api
+npx servra create my-api
 cd my-api
 npm install
 npm run dev
@@ -56,7 +62,7 @@ centralized error responses, and Node test examples.
 ## Quick Start
 
 ```typescript
-import { createApp } from '@srvinix/loa';
+import { createApp } from 'servra';
 
 const app = createApp({
   security: {
@@ -74,7 +80,7 @@ const app = createApp({
 
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Hello, LOA Framework!',
+    message: 'Hello, Servra!',
     version: '1.0.0' 
   });
 });
@@ -92,7 +98,7 @@ app.listen(3000, () => {
 ## Security Features
 
 ```typescript
-import { helmet, rateLimit, cors, csrf, sanitize } from '@srvinix/loa';
+import { helmet, rateLimit, cors, csrf, sanitize } from 'servra';
 
 // Security headers
 app.use(helmet({
@@ -123,14 +129,14 @@ app.use(csrf({
 app.use(sanitize());
 ```
 
-By default, LOA ships with hardened response headers, closed CORS, request IDs,
+By default, Servra ships with hardened response headers, closed CORS, request IDs,
 bounded body parsing, proxy-spoofing protection, in-memory rate limiting with
 cleanup, and signed CSRF tokens when CSRF is enabled.
 
 ## Middleware
 
 ```typescript
-import { bodyParser, queryParser, proxyProtection, fileSizeLimit } from '@srvinix/loa';
+import { bodyParser, queryParser, proxyProtection, fileSizeLimit } from 'servra';
 
 // Parse request body
 app.use(bodyParser({ limit: '1mb' }));
@@ -156,7 +162,7 @@ app.use(fileSizeLimit({
 
 | Function | Description |
 |----------|-------------|
-| `createApp(options?)` | Create new LOA application |
+| `createApp(options?)` | Create a new Servra application |
 | `createRouter()` | Create new router |
 | `createRequest()` | Create request object |
 | `createResponse()` | Create response object |
@@ -184,7 +190,7 @@ app.use(fileSizeLimit({
 ## Performance
 
 ```
-LOA Framework Benchmark
+Servra Benchmark
 =======================
 
 Router (10,000 routes):
@@ -204,6 +210,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**Built with ❤️ by LOA Team**
+**Developed by SR VINIX**
 
 </div>

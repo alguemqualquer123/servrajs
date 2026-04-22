@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Validator
+ * Servra - Validator
  * 
  * Simple validation system with Zod support.
  * Works without Zod if not installed.

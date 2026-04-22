@@ -1,8 +1,8 @@
-import type { LOARequest, LOAResponse } from '__PACKAGE_NAME__';
+import type { ServraRequest, ServraResponse } from '__PACKAGE_NAME__';
 import { createUser, getUser, listUsers } from '../services/user.service.js';
 import { created, ok } from '../utils/response.js';
 
-export function index(req: LOARequest, res: LOAResponse) {
+export function index(req: ServraRequest, res: ServraResponse) {
   return ok(res, {
     name: '__PROJECT_NAME__',
     version: '1.0.0',
@@ -10,14 +10,14 @@ export function index(req: LOARequest, res: LOAResponse) {
   });
 }
 
-export function list(req: LOARequest, res: LOAResponse) {
+export function list(req: ServraRequest, res: ServraResponse) {
   return ok(res, listUsers());
 }
 
-export function show(req: LOARequest, res: LOAResponse) {
+export function show(req: ServraRequest, res: ServraResponse) {
   return ok(res, getUser(req.param('id')));
 }
 
-export function create(req: LOARequest, res: LOAResponse) {
+export function create(req: ServraRequest, res: ServraResponse) {
   return created(res, createUser(req.body));
 }

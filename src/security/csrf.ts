@@ -1,5 +1,5 @@
 /**
- * LOA Framework - CSRF Protection
+ * Servra - CSRF Protection
  *
  * Signed double-submit token protection with stateless verification.
  */

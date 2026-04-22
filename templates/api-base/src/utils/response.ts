@@ -1,13 +1,13 @@
-import type { LOAResponse } from '__PACKAGE_NAME__';
+import type { ServraResponse } from '__PACKAGE_NAME__';
 
-export function ok(res: LOAResponse, data: unknown) {
+export function ok(res: ServraResponse, data: unknown) {
   return res.json({ ok: true, data });
 }
 
-export function created(res: LOAResponse, data: unknown) {
+export function created(res: ServraResponse, data: unknown) {
   return res.status(201).json({ ok: true, data });
 }
 
-export function message(res: LOAResponse, statusCode: number, text: string) {
+export function message(res: ServraResponse, statusCode: number, text: string) {
   return res.status(statusCode).json({ ok: statusCode < 400, message: text });
 }

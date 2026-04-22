@@ -1,5 +1,5 @@
 /**
- * LOA Framework - CORS (Cross-Origin Resource Sharing)
+ * Servra - CORS (Cross-Origin Resource Sharing)
  * 
  * Built-in CORS support with strict defaults.
  */

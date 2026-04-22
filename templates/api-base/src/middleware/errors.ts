@@ -1,6 +1,6 @@
-import type { LOARequest, LOAResponse } from '__PACKAGE_NAME__';
+import type { ServraRequest, ServraResponse } from '__PACKAGE_NAME__';
 
-export function errorHandler(error: Error, req: LOARequest, res: LOAResponse) {
+export function errorHandler(error: Error, req: ServraRequest, res: ServraResponse) {
   const candidate = error as Error & {
     statusCode?: number;
     status?: number;

@@ -1,6 +1,6 @@
 # __PROJECT_NAME__
 
-API base criada com `__PACKAGE_NAME__`.
+Base API generated with `__PACKAGE_NAME__` (Servra).
 
 ## Scripts
 
@@ -20,7 +20,7 @@ npm start
 - `GET /api/v1/users/:id`
 - `POST /api/v1/users`
 
-## Exemplo
+## Example
 
 ```bash
 curl http://127.0.0.1:3000/health
@@ -31,7 +31,7 @@ curl -X POST http://127.0.0.1:3000/api/v1/users \
   -d "{\"name\":\"Ada Lovelace\",\"email\":\"ada@example.com\"}"
 ```
 
-Configure variáveis copiando `.env.example` para `.env` no seu ambiente de deploy.
+Configure environment variables by copying `.env.example` to `.env` in your deploy environment.
 
-Em desenvolvimento, `/docs` usa a chave `dev-docs-key` se `DOCS_KEYS` não estiver configurado.
-Em produção, configure `DOCS_KEYS` para liberar a UI e o executor de requisições.
+In development, `/docs` uses the `dev-docs-key` key if `DOCS_KEYS` is not set.
+In production, set `DOCS_KEYS` to enable the UI and the request runner.

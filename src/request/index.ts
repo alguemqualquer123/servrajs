@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Request Export
+ * Servra - Request Export
  */
 
 export { LOARequest, createRequest } from './request';

@@ -1,22 +1,20 @@
 /**
- * LOA Framework - Rate Limiting
+ * Servra - Rate Limiting
  * 
  * Built-in rate limiting to prevent brute force and DoS attacks.
- * Uses in-memory store for simplicity, can be extended to Redis.
+ * Uses sliding window algorithm for better accuracy.
  */
 
 import type { RateLimitOptions, Middleware, LOARequest, LOAResponse } from '../core/types';
 
 // ============================================================================
-// Rate Limit Store
+// Rate Limit Store - Sliding Window
 // ============================================================================
 
 interface RateLimitEntry {
-  count: number;
-  resetTime: number;
+  timestamps: number[];
 }
 
-// In-memory store (would use Redis in production)
 const store = new Map<string, RateLimitEntry>();
 let nextCleanup = 0;
 
@@ -48,55 +46,37 @@ export function rateLimit(options: Partial<RateLimitOptions> = {}): Middleware {
 
     const key = opts.keyGenerator(req);
     const now = Date.now();
+    const windowStart = now - opts.windowMs;
     cleanupExpired(now, opts.windowMs, opts.storeLimit);
 
-    // Get or create entry
     let entry = store.get(key);
-    
-    if (!entry || now > entry.resetTime) {
-      // Reset
-      entry = {
-        count: 0,
-        resetTime: now + opts.windowMs,
-      };
+    if (!entry) {
+      entry = { timestamps: [] };
       store.set(key, entry);
     }
 
-    // Increment
-    entry.count++;
+    entry.timestamps = entry.timestamps.filter(ts => ts > windowStart);
+    entry.timestamps.push(now);
 
-    // Set headers
+    const remaining = Math.max(0, opts.max - entry.timestamps.length);
+
     if (opts.standardHeaders) {
-      const remaining = Math.max(0, opts.max - entry.count);
-      const resetTime = Math.ceil(entry.resetTime / 1000);
-      
+      const resetTime = Math.ceil((now + opts.windowMs) / 1000);
       res.header('RateLimit-Limit', opts.max.toString());
       res.header('RateLimit-Remaining', remaining.toString());
       res.header('RateLimit-Reset', resetTime.toString());
     }
 
     if (opts.legacyHeaders) {
-      const remaining = Math.max(0, opts.max - entry.count);
       res.header('X-RateLimit-Limit', opts.max.toString());
       res.header('X-RateLimit-Remaining', remaining.toString());
     }
 
-    // Check limit
-    if (entry.count > opts.max) {
-      res.header('Retry-After', Math.ceil((entry.resetTime - now) / 1000).toString());
+    if (entry.timestamps.length > opts.max) {
+      const retryAfter = Math.ceil((entry.timestamps[0] + opts.windowMs - now) / 1000);
+      res.header('Retry-After', Math.max(1, retryAfter).toString());
       opts.handler(req, res);
       return;
-    }
-
-    if (opts.skipSuccessfulRequests || opts.skipFailedRequests) {
-      const raw = res.raw;
-      raw.once('finish', () => {
-        const statusCode = raw.statusCode || res.statusCode;
-        if ((opts.skipSuccessfulRequests && statusCode < 400) ||
-            (opts.skipFailedRequests && statusCode >= 400)) {
-          decrementKey(key);
-        }
-      });
     }
 
     next();
@@ -119,22 +99,8 @@ export function clearStore(): void {
   store.clear();
 }
 
-export function getEntry(key: string): RateLimitEntry | undefined {
-  return store.get(key);
-}
-
 export function resetKey(key: string): void {
   store.delete(key);
-}
-
-function decrementKey(key: string): void {
-  const entry = store.get(key);
-  if (!entry) return;
-
-  entry.count = Math.max(0, entry.count - 1);
-  if (entry.count === 0) {
-    store.delete(key);
-  }
 }
 
 function cleanupExpired(now: number, windowMs: number, storeLimit: number): void {
@@ -142,8 +108,11 @@ function cleanupExpired(now: number, windowMs: number, storeLimit: number): void
     return;
   }
 
+  const expiredThreshold = now - windowMs;
+
   for (const [key, entry] of store) {
-    if (entry.resetTime <= now) {
+    entry.timestamps = entry.timestamps.filter(ts => ts > expiredThreshold);
+    if (entry.timestamps.length === 0) {
       store.delete(key);
     }
   }

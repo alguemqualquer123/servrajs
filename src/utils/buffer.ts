@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Buffer Pool
+ * Servra - Buffer Pool
  * 
  * Pre-allocated buffer pool to reduce GC pressure.
  */

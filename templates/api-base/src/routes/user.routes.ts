@@ -1,7 +1,7 @@
-import type { LOAApp } from '__PACKAGE_NAME__';
+import type { ServraApp } from '__PACKAGE_NAME__';
 import * as users from '../controllers/user.controller.js';
 
-export function registerUserRoutes(app: LOAApp): void {
+export function registerUserRoutes(app: ServraApp): void {
   app.get('/api/v1', users.index);
   app.get('/api/v1/users', users.list);
   app.get('/api/v1/users/:id', users.show);

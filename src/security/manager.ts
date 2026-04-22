@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Security Manager
+ * Servra - Security Manager
  * 
  * Central security coordinator that manages all built-in security features.
  * Security is enabled by default, with all headers, rate limiting, etc.
@@ -103,6 +103,7 @@ export class SecurityManager {
       xPermittedCrossDomainPolicies: 'none',
       xXSSProtection: '1; mode=block',
       permissionsPolicy: true,
+      expectCt: { maxAge: 31536000, enforce: true },
     };
   }
 

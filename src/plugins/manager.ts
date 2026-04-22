@@ -1,5 +1,5 @@
 /**
- * LOA Framework - Plugin System
+ * Servra - Plugin System
  */
 
 import type { Plugin, LOAApp } from '../core/types';
