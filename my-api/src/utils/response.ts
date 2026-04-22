@@ -1,4 +1,4 @@
-import type { ServraResponse } from 'servrajs';
+import type { ServraResponse } from 'servra';
 
 export function ok(res: ServraResponse, data: unknown) {
   return res.json({ ok: true, data });

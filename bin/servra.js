@@ -10,7 +10,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSy
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const PACKAGE_NAME = 'servra';
+const PACKAGE_NAME = 'servrajs';
 const VERSION = '1.0.0';
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const apiTemplateDir = join(packageRoot, 'templates', 'api-base');

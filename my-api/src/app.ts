@@ -4,6 +4,8 @@ import {
   fileSizeLimit,
   queryParser,
   sanitize,
+  ServraRequest,
+  ServraResponse,
 } from 'servrajs';
 import { env } from './config/env.js';
 import { errorHandler } from './middleware/errors.js';
@@ -106,7 +108,7 @@ function registerDocs(app: ReturnType<typeof createApp>): void {
         body: {
           ok: true,
           data: {
-            name: '__PROJECT_NAME__',
+            name: 'my-api',
             version: '1.0.0',
             routes: ['/health', '/api/v1/users'],
           },

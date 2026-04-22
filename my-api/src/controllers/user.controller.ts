@@ -1,10 +1,10 @@
-import type { ServraRequest, ServraResponse } from 'servrajs';
+import type { ServraRequest, ServraResponse } from 'servra';
 import { createUser, getUser, listUsers } from '../services/user.service.js';
 import { created, ok } from '../utils/response.js';
 
 export function index(req: ServraRequest, res: ServraResponse) {
   return ok(res, {
-    name: '__PROJECT_NAME__',
+    name: 'my-api',
     version: '1.0.0',
     routes: ['/health', '/api/v1/users'],
   });

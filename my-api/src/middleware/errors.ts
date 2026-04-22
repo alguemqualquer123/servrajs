@@ -1,4 +1,4 @@
-import type { ServraRequest, ServraResponse } from 'servrajs';
+import type { ServraRequest, ServraResponse } from 'servra';
 
 export function errorHandler(error: Error, req: ServraRequest, res: ServraResponse) {
   const candidate = error as Error & {

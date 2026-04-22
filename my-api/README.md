@@ -1,4 +1,4 @@
-# servrajs
+# my-api
 
 Base API generated with `servrajs` (Servra).
 

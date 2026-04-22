@@ -1,4 +1,4 @@
-import type { ServraRequest, ServraResponse } from 'servrajs';
+import type { ServraRequest, ServraResponse } from 'servra';
 
 const startedAt = new Date();
 
