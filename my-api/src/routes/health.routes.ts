@@ -1,4 +1,4 @@
-import type { ServraApp } from 'servra';
+import type { ServraApp } from 'servrajs';
 import { health } from '../controllers/health.controller.js';
 
 export function registerHealthRoutes(app: ServraApp): void {

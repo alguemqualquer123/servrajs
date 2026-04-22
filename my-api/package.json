@@ -5,10 +5,14 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "tsc && node --watch dist/index.js",
+    "type-check": "tsc --noEmit",
+    "dev": "npm run type-check && tsc && node --watch dist/index.js",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "tsc && node --test dist/app.test.js"
+  },
+  "bin": {
+    "my-api": "./bin/cli.js"
   },
   "dependencies": {
     "servrajs": "^1.0.0"

@@ -49,8 +49,8 @@ export function createApi() {
   ]);
 
   registerRoutes(app);
-  app.get('/openapi.json', (req, res) => res.json(app.getOpenApiSpec()));
-  app.get('/scalar', (req, res) => {
+  app.get('/openapi.json', (req: ServraRequest, res: ServraResponse) => res.json(app.getOpenApiSpec()));
+app.get('/scalar', (req: ServraRequest, res: ServraResponse) => {
     const html = `<!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +59,7 @@ export function createApi() {
 </head>
 <body>
   <script type="module">
-    import {{ default as ApiReference }} from 'https://cdn.jsdelivr.net/npm/@scalar/api-reference';
+    import { default as ApiReference } from 'https://cdn.jsdelivr.net/npm/@scalar/api-reference';
     const el = document.createElement('div');
     document.body.appendChild(el);
     ApiReference({

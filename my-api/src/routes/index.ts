@@ -1,4 +1,4 @@
-import type { ServraApp } from 'servra';
+import type { ServraApp } from 'servrajs';
 import { registerHealthRoutes } from './health.routes.js';
 import { registerUserRoutes } from './user.routes.js';
 

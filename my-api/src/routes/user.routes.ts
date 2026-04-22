@@ -1,4 +1,4 @@
-import type { ServraApp } from 'servra';
+import type { ServraApp } from 'servrajs';
 import * as users from '../controllers/user.controller.js';
 
 export function registerUserRoutes(app: ServraApp): void {

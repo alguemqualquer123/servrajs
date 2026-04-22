@@ -1,4 +1,4 @@
-import type { ServraRequest, ServraResponse } from 'servra';
+import type { ServraRequest, ServraResponse } from 'servrajs';
 import { createUser, getUser, listUsers } from '../services/user.service.js';
 import { created, ok } from '../utils/response.js';
 
