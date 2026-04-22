@@ -1,0 +1,77 @@
+{
+  "name": "@srvinix/loa",
+  "version": "1.0.0",
+  "description": "Lightweight Optimized Application - Ultrafast, Secure, Modern backend framework for Node.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "loa": "./bin/loa.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "templates",
+    "README.md"
+  ],
+  "imports": {
+    "#*": "./src/*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alguemqualquer123/loa_framework.git"
+  },
+  "homepage": "https://github.com/alguemqualquer123/loa_framework#readme",
+  "bugs": {
+    "url": "https://github.com/alguemqualquer123/loa_framework/issues"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/build.js --watch",
+    "test": "node scripts/build.js && node tests/index.js",
+    "benchmark": "node scripts/build.js && node tests/benchmark.js",
+    "start": "node scripts/build.js && node bin/loa.js start",
+    "cli": "node bin/loa.js",
+    "typecheck": "tsc --noEmit",
+    "prepack": "node scripts/build.js",
+    "prepublishOnly": "node scripts/build.js",
+    "publish": "npm publish --access public",
+    "publish:beta": "npm publish --access public --tag beta",
+    "publish:dry": "npm publish --access public --dry-run",
+    "format": "prettier --write src/**/*.ts",
+    "lint": "tsc --noEmit",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "keywords": [
+    "framework",
+    "http",
+    "server",
+    "rest",
+    "api",
+    "performance",
+    "security",
+    "fast",
+    "nodejs"
+  ],
+  "author": "LOA Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.8.1",
+    "@swc/core": "^1.15.30",
+    "@types/node": "^20.10.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "zod": ">=3.0.0"
+  }
+}

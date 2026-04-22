@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120" height="20" role="img" aria-label="LOA Framework">
+  <linearGradient id="b" x2="0" y2="100%">
+    <stop offset="0" stop-color="#1a1a2e"/>
+    <stop offset="1" stop-color="#16213e"/>
+  </linearGradient>
+  <clipPath id="a">
+    <rect width="120" height="20" rx="3" fill="#fff"/>
+  </clipPath>
+  <g clip-path="url(#a)">
+    <rect width="50" height="20" fill="#e94560"/>
+    <rect x="50" width="70" height="20" fill="url(#b)"/>
+    <path fill="#fff" d="M5 5h4v4H5zM5 11h4v4H5zM11 5h4v4h-4zM17 5h4v4h-4zM11 11h4v4h-4z"/>
+    <circle cx="35" cy="10" r="4" fill="#e94560"/>
+    <path d="M33 10h4l1 2 1-2h4" stroke="#fff" stroke-width="1" fill="none"/>
+    <circle cx="75" cy="10" r="3" fill="#4ecca3"/>
+    <circle cx="85" cy="10" r="3" fill="#4ecca3"/>
+    <circle cx="95" cy="10" r="3" fill="#4ecca3"/>
+    <circle cx="105" cy="10" r="2" fill="#4ecca3" opacity="0.5"/>
+  </g>
+  <g fill="#fff" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-anchor="middle" font-size="8">
+    <text x="25" y="14" fill="#fff" font-weight="bold">LOA</text>
+    <text x="85" y="14" fill="#fff">v1.0</text>
+  </g>
+</svg>
