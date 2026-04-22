@@ -15,10 +15,10 @@
 
 Ultrafast, Secure, Modern Backend Framework for Node.js
 
-[![Node.js Version](https://img.shields.io/node/v/%40srvinix%2Fservra)](https://nodejs.org)
+[![Node.js Version](https://img.shields.io/node/v/%40srvinix%2Fservrajs)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org)
-[![License](https://img.shields.io/npm/l/%40srvinix%2Fservra)](LICENSE)
-[![npm version](https://img.shields.io/npm/v/%40srvinix%2Fservra)](https://www.npmjs.com/package/servra)
+[![License](https://img.shields.io/npm/l/%40srvinix%2Fservrajs)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/%40srvinix%2Fservrajs)](https://www.npmjs.com/package/servrajs)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/alguemqualquer123/servra/ci-cd.yml)](https://github.com/alguemqualquer123/servrajs/actions)
 
 </div>
@@ -27,7 +27,7 @@ Ultrafast, Secure, Modern Backend Framework for Node.js
 
 - GitHub: https://github.com/alguemqualquer123/servrajs
 - LinkedIn: https://linkedin.com/in/srvinix
-- npm: https://www.npmjs.com/package/servra
+- npm: https://www.npmjs.com/package/servrajs
 
 ## Features
 
@@ -43,7 +43,7 @@ Ultrafast, Secure, Modern Backend Framework for Node.js
 ## Installation
 
 ```bash
-npm install servra
+npm install servrajs
 ```
 
 ## Create an API template
@@ -81,7 +81,7 @@ const app = createApp({
 app.get('/', (req, res) => {
   res.json({ 
     message: 'Hello, Servra!',
-    version: '1.0.0' 
+    version: '1.0.2' 
   });
 });
 
