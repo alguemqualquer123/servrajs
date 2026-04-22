@@ -18,7 +18,7 @@ npm install servra
 The CLI ships with the package and can generate a small API template.
 
 ```bash
-npx servra create my-api
+npx servrajs create my-api
 cd my-api
 npm install
 npm run dev

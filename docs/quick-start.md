@@ -48,6 +48,6 @@ await app.listen(3000, '127.0.0.1');
 If you want a working layout with docs and example routes:
 
 ```bash
-npx servra create my-api
+npx servrajs create my-api
 ```
 
